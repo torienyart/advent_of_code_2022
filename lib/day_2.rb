@@ -80,40 +80,40 @@
 
 
 ## Part Two
-file = File.open("./info/day_2.txt")
+file = File.open("./info/day_2_dummy_2.txt")
 rounds_array = file.readlines(chomp: true)
 
 def actual_play(rounds_array)
   key = {
-    "AX" => "AB",
-    "BX" => "BC",
-    "CX" => "CA",
-    "AY" => "AA",
-    "BY" => "BB",
-    "CY" => "CC",
-    "AZ" => "AC",
-    "BZ" => "BA",
-    "CZ" => "CB"
+    "A X" => "A Z",
+    "B X" => "B X",
+    "C X" => "C Y",
+    "A Y" => "A X",
+    "B Y" => "B Y",
+    "C Y" => "C Z",
+    "A Z" => "A Y",
+    "B Z" => "B Z",
+    "C Z" => "C X"
   }
   rounds_array.map do |round|
-    key[round.delete(" ")]
+    key[round]
   end
 end
 
 def play_numbers(round)
-    round.map do |throw|
-      if throw == "A" || throw == "X"
-        1 #rock
-      elsif throw == "B" || throw == "Y"
-        2 #paper
-      elsif throw == "C" || throw == "Z"
-        3 #scissors
-      end
+  round.map do |throw|
+    if throw == "A" || throw == "X"
+      1 #rock
+    elsif throw == "B" || throw == "Y"
+      2 #paper
+    elsif throw == "C" || throw == "Z"
+      3 #scissors
     end
   end
+end
 
 def outcome_score(elf, me)
-  if me == 1 && outcome == 3
+  if me == 1 && elf == 3
     6
   elsif elf == 1 && me == 3
     0
