@@ -38,23 +38,82 @@
 #   a. assess the outcome score and the play score to get a total score for each round and add them to the counter
 # 4. return the counter to get the total score
 
+# file = File.open("./info/day_2.txt")
+# rounds_array = file.readlines(chomp: true)
+
+# def play_numbers(round)
+#   round.map do |throw|
+#     if throw == "A" || throw == "X"
+#       1 #rock
+#     elsif throw == "B" || throw == "Y"
+#       2 #paper
+#     elsif throw == "C" || throw == "Z"
+#       3 #scissors
+#     end
+#   end
+# end
+
+# def outcome_score(elf, me)
+#   if me == 1 && elf == 3
+#     6
+#   elsif elf == 1 && me == 3
+#     0
+#   elsif me > elf
+#     6
+#   elsif me < elf
+#     0
+#   elsif me == elf
+#     3
+#   end
+# end
+
+# counter = 0
+
+# rounds_array.each do |round|
+#   split_round = round.split(" ")
+#   round_in_numbers = play_numbers(split_round)
+#   counter += outcome_score(*round_in_numbers)
+#   counter += round_in_numbers[1]
+# end
+
+# p counter
+
+
+## Part Two
 file = File.open("./info/day_2.txt")
 rounds_array = file.readlines(chomp: true)
 
-def play_numbers(round)
-  round.map do |throw|
-    if throw == "A" || throw == "X"
-      1 #rock
-    elsif throw == "B" || throw == "Y"
-      2 #paper
-    elsif throw == "C" || throw == "Z"
-      3 #scissors
-    end
+def actual_play(rounds_array)
+  key = {
+    "AX" => "AB",
+    "BX" => "BC",
+    "CX" => "CA",
+    "AY" => "AA",
+    "BY" => "BB",
+    "CY" => "CC",
+    "AZ" => "AC",
+    "BZ" => "BA",
+    "CZ" => "CB"
+  }
+  rounds_array.map do |round|
+    key[round.delete(" ")]
   end
 end
 
+def play_numbers(round)
+    round.map do |throw|
+      if throw == "A" || throw == "X"
+        1 #rock
+      elsif throw == "B" || throw == "Y"
+        2 #paper
+      elsif throw == "C" || throw == "Z"
+        3 #scissors
+      end
+    end
+  end
+
 def outcome_score(elf, me)
-  if me == 1 && elf == 3
+  if me == 1 && outcome == 3
     6
   elsif elf == 1 && me == 3
     0
@@ -69,7 +128,7 @@ end
 
 counter = 0
 
-rounds_array.each do |round|
+actual_play(rounds_array).each do |round|
   split_round = round.split(" ")
   round_in_numbers = play_numbers(split_round)
   counter += outcome_score(*round_in_numbers)
@@ -77,4 +136,3 @@ rounds_array.each do |round|
 end
 
 p counter
-
