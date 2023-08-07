@@ -80,7 +80,7 @@
 
 
 ## Part Two
-file = File.open("./info/day_2_dummy_2.txt")
+file = File.open("./info/day_2.txt")
 rounds_array = file.readlines(chomp: true)
 
 def actual_play(rounds_array)
